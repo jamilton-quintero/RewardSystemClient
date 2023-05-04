@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Gestión de usuarios</h1>
+
+  <p-button (click)="showDialog()" icon="pi pi-external-link" label="Load Data"></p-button>
+
+  <p-button (click)="showDialogAddUser()" icon="pi pi-external-link" label="Add New"></p-button>
+
+  <app-get-user-management></app-get-user-management>
+
+</div>
+
+<app-load-masive-user-user-management></app-load-masive-user-user-management>
+
+<app-add-user-management [visibleAdd]="showDialogAdd"></app-add-user-management>

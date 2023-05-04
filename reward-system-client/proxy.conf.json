@@ -1,0 +1,7 @@
+{
+  "/reward/v1": {
+    "target": "http://localhost:8085",
+    "logLevel": "debug",
+    "secure": false
+  }
+}

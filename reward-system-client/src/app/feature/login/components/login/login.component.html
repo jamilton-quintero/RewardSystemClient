@@ -1,0 +1,186 @@
+<div class="container-fluid ps-md-0">
+  <app-toolbar></app-toolbar>
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4" *ngIf="!registerMode">{{ 'login.welcomeback' | translate }}</h3>
+              <h3 class="login-heading mb-4" *ngIf="registerMode">Create an account</h3>
+
+              <div class="login-heading mb-4">
+                <button (click)="switchForm()" class="btn btn-outline-info">
+                  {{ registerMode ? 'Login' : 'Register ' }}
+                </button>
+              </div>
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <!-- Login Form -->
+                <ng-container *ngIf="!registerMode">
+                  <!-- Email -->
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                      formControlName="email"
+                      [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                    />
+                    <label for="floatingInput">{{ 'login.email' | translate }}</label>
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.email">{{ 'login.errormesasges.invalidemail' | translate }}</div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="floatingPassword"
+                      placeholder="Password"
+                      formControlName="password"
+                      [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                    />
+                    <label for="floatingPassword">{{ 'login.registerform.password' | translate }}</label>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">{{ 'login.errormesasges.invalidpassword' | translate }}</div>
+                    </div>
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck" />
+                    <label class="form-check-label" for="rememberPasswordCheck">
+                      {{ 'login.rememberpass' | translate }}
+                    </label>
+                  </div>
+
+                  <div class="d-grid">
+                    <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" (click)="login()">{{ 'login.enter' | translate }}</button>
+                    <div class="text-center">
+                      <a class="small" href="#">{{ 'login.forgotpass' | translate }}</a>
+                    </div>
+                    
+                  </div>
+
+                </ng-container>
+     
+                <!-- Register Form -->
+                <ng-container *ngIf="registerMode">
+                  <!-- Full Name -->
+                  <div class="form-group">
+                    <label>{{ 'login.registerform.name' | translate }}</label>
+                    <input
+                      type="text"
+                      formControlName="fullname"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }"
+                    />
+                    <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                      <div *ngIf="f.fullname.errors.required">{{ 'login.registerform.error.fullname' | translate }}</div>
+                    </div>
+                  </div>
+                  <!-- Username -->
+                  <div class="form-group">
+                    <label>{{ 'login.registerform.username' | translate }}</label>
+                    <input
+                      type="text"
+                      formControlName="username"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                    />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">Username is required</div>
+                      <div *ngIf="f.username.errors.minlength">
+                        Username must be at least 6 characters
+                        {{ 'login.registerform.error.mincaracters' | translate }}
+                      </div>
+                      <div *ngIf="f.username.errors.maxlength">
+                        Username must not exceed 20 characters
+                        {{ 'login.registerform.error.maxcaracters' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label>{{ 'login.registerform.email' | translate }}</label>
+                    <input
+                      type="text"
+                      formControlName="email"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                    />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">{{ 'login.registerform.error.requeredemail' | translate }}</div>
+                      <div *ngIf="f.email.errors.email">{{ 'login.registerform.error.invalidaemail' | translate }}</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Password -->
+                  <div class="form-group">
+                    <label>{{ 'login.registerform.password' | translate }}</label>
+                    <input
+                        type="password"
+                        formControlName="password"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                    />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">
+                            {{ 'login.registerform.error.passwordrequired' | translate }}
+                        </div>
+                        <div *ngIf="f.confirmPassword.errors.matching">
+                          {{ 'login.registerform.error.passwordnotmatch' | translate }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Confirm password -->
+                  <div class="form-group">
+                    <label>{{ 'login.registerform.confirmpassword' | translate }}</label>
+                    <input
+                        type="password"
+                        formControlName="confirmPassword"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                    />
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">
+                            {{ 'login.registerform.error.passwordrequired' | translate }}
+                        </div>
+                        <div *ngIf="f.confirmPassword.errors.matching">
+                            {{ 'login.registerform.error.passwordnotmatch' | translate }}
+                        </div>
+                    </div>
+                  </div>
+  
+                    <div class="form-group form-check">
+                      <input
+                        type="checkbox"
+                        formControlName="acceptTerms"
+                        class="form-check-input"
+                        [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }"
+                      />
+                      <label for="acceptTerms" class="form-check-label">{{ 'login.registerform.agreeterms' | translate }}</label>
+                      <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">
+                        {{ 'login.registerform.error.accepterms' | translate }}
+                      </div>
+                    </div>
+  
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">{{ 'login.register' | translate }}</button>
+                      <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                        Reset
+                      </button>
+                    </div>
+                  </ng-container>
+               
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

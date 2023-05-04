@@ -1,0 +1,13 @@
+<p-dialog header="Header" [(visible)]="visibleLoad" [style]="{ width: '50vw' }">
+    <div class="flex py-2 justify-content-center">
+      <div class="mt-3">
+        <p-fileUpload name="clientes" url="//localhost:3000/upload" accept=".xls,.xlsx,.csv"
+          (onUpload)="onUpload($event)">
+          <ng-template pTemplate="content">
+            <button pButton type="button" label="Cargar lista de clientes" class="btn btn-secondary"></button>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+    </div>
+  </p-dialog>
+  
