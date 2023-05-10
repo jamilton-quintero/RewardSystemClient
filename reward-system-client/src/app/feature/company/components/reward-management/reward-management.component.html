@@ -1,163 +1,17 @@
 <div class="container">
-    <h1>Gestión de recompensas</h1>
+
+    <h1> {{ 'company.reward.componenttitle' | translate }}</h1>
+    <!--p-button (click)="showDialogAddReward()" icon="pi pi-external-link" label="Add reward"></p-button-->
+    <button *ngIf="showAddList" (click)="showAddRewardForm()" class="btn btn-primary">
+        <i class="pi pi-external-link"></i> {{ 'company.reward.btnaddreward' | translate }}
+    </button>
+    <button *ngIf="!showAddList" (click)="showAddRewardList()" class="btn btn-primary">
+        <i class="pi pi-external-link"></i> {{ 'company.reward.btnreturn' | translate }}
+    </button>
   
-    <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+      <app-add-reward-management *ngIf="showAddForm" (rewardCreated)="rewardCreated($event)"></app-add-reward-management>
+      <app-list-reward-management *ngIf="!showAddForm"></app-list-reward-management>
+      
+</div>
 
-    <div class="mt-3">
-      <p-table [value]="rewars">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Name</th>
-            <th>Points to redeem</th>
-            <th>Expiration Date</th>
-            <th>Acciones</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-user>
-          <tr>
-
-            <td>{{ user.name }}</td>
-            <td>{{ user.porintsToRedem }}</td>
-            <td>{{ user.expirationDate }}</td>
-            <td>
-              <button pButton icon="pi pi-pencil" class="btn btn-warning me-1" (click)="onEditUser(user)"></button>
-              <button pButton icon="pi pi-trash" class="btn btn-danger" (click)="onDeleteUser(user)"></button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
-
-  <p-dialog header="Header" [(visible)]="visible" [style]="{ width: '50vw' }">
-    <div class="flex py-2 justify-content-center">
-
-        <form [formGroup]="form" (ngSubmit)="registerCompanyConfig()" novalidate>
-            <!-- Points to Redeem -->
-            <div class="form-floating mb-3">
-              <input
-                type="number"
-                class="form-control"
-                id="floatingPointsToRedeem"
-                placeholder="Points to Redeem"
-                formControlName="pointsToRedeem"
-                [ngClass]="{ 'is-invalid': submitted && f.pointsToRedeem.errors }"
-              />
-              <label for="floatingPointsToRedeem">{{ 'config.pointsToRedeem' | translate }}</label>
-              <div *ngIf="submitted && f.pointsToRedeem.errors" class="invalid-feedback">
-                <div *ngIf="f.pointsToRedeem.errors.required">{{ 'config.errormessages.invalidPointsToRedeem' | translate }}</div>
-              </div>
-            </div>
-            <!-- Available Rewards -->
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="floatingAvailableRewards"
-                placeholder="Available Rewards"
-                formControlName="availableRewards"
-                [ngClass]="{ 'is-invalid': submitted && f.availableRewards.errors }"
-              />
-              <label for="floatingAvailableRewards">{{ 'config.availableRewards' | translate }}</label>
-              <div *ngIf="submitted && f.availableRewards.errors" class="invalid-feedback">
-                <div *ngIf="f.availableRewards.errors.required">{{ 'config.errormessages.invalidAvailableRewards' | translate }}</div>
-              </div>
-            </div>
-            <!-- Daily Points Limit -->
-            <div class="form-floating mb-3">
-              <input
-                type="number"
-                class="form-control"
-                id="floatingDailyPointsLimit"
-                placeholder="Daily Points Limit"
-                formControlName="dailyPointsLimit"
-                [ngClass]="{ 'is-invalid': submitted && f.dailyPointsLimit.errors }"
-              />
-              <label for="floatingDailyPointsLimit">{{ 'config.dailyPointsLimit' | translate }}</label>
-              <div *ngIf="submitted && f.dailyPointsLimit.errors" class="invalid-feedback">
-                <div *ngIf="f.dailyPointsLimit.errors.required">{{ 'config.errormessages.invalidDailyPointsLimit' | translate }}</div>
-              </div>
-            </div>
-            <!-- Weekly Points Limit -->
-            <div class="form-floating mb-3">
-              <input
-                type="number"
-                class="form-control"
-                id="floatingWeeklyPointsLimit"
-                placeholder="Weekly Points Limit"
-                formControlName="weeklyPointsLimit"
-                [ngClass]="{ 'is-invalid': submitted && f.weeklyPointsLimit.errors }"
-              />
-              <label for="floatingWeeklyPointsLimit">{{ 'config.weeklyPointsLimit' | translate }}</label>
-              <div *ngIf="submitted && f.weeklyPointsLimit.errors" class="invalid-feedback">
-                <div *ngIf="f.weeklyPointsLimit.errors.required">{{ 'config.errormessages.invalidWeeklyPointsLimit' | translate }}</div>
-              </div>
-            </div>
-            <!-- Points Accumulated Message -->
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="floatingPointsAccumulatedMessage"
-                placeholder="Points Accumulated Message"
-                formControlName="pointsAccumulatedMessage"           
-          [ngClass]="{ 'is-invalid': submitted && f.pointsAccumulatedMessage.errors }"
-          />
-          <label for="floatingPointsAccumulatedMessage">{{ 'config.pointsAccumulatedMessage' | translate }}</label>
-          <div *ngIf="submitted && f.pointsAccumulatedMessage.errors" class="invalid-feedback">
-            <div *ngIf="f.pointsAccumulatedMessage.errors.required">{{ 'config.errormessages.invalidPointsAccumulatedMessage' | translate }}</div>
-          </div>
-            </div>
-            <!-- Redemption Message -->
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="floatingRedemptionMessage"
-                placeholder="Redemption Message"
-                formControlName="redemptionMessage"
-                [ngClass]="{ 'is-invalid': submitted && f.redemptionMessage.errors }"
-              />
-              <label for="floatingRedemptionMessage">{{ 'config.redemptionMessage' | translate }}</label>
-              <div *ngIf="submitted && f.redemptionMessage.errors" class="invalid-feedback">
-                <div *ngIf="f.redemptionMessage.errors.required">{{ 'config.errormessages.invalidRedemptionMessage' | translate }}</div>
-              </div>
-            </div>
-            <!-- Points Range -->
-            <div class="form-floating mb-3">
-              <input
-                type="number"
-                class="form-control"
-                id="floatingPointsRange"
-                placeholder="Points Range"
-                formControlName="pointsRange"
-                [ngClass]="{ 'is-invalid': submitted && f.pointsRange.errors }"
-              />
-              <label for="floatingPointsRange">{{ 'config.pointsRange' | translate }}</label>
-              <div *ngIf="submitted && f.pointsRange.errors" class="invalid-feedback">
-                <div *ngIf="f.pointsRange.errors.required">{{ 'config.errormessages.invalidPointsRange' | translate }}</div>
-              </div>
-            </div>
-            <!-- Expiration Date -->
-            <div class="form-floating mb-3">
-              <input
-                type="date"
-                class="form-control"
-                id="floatingExpirationDate"
-                placeholder="Expiration Date"
-                formControlName="expirationDate"
-                [ngClass]="{ 'is-invalid': submitted && f.expirationDate.errors }"
-              />
-              <label for="floatingExpirationDate">{{ 'config.expirationDate' | translate }}</label>
-              <div *ngIf="submitted && f.expirationDate.errors" class="invalid-feedback">
-                <div *ngIf="f.expirationDate.errors.required">{{ 'config.errormessages.invalidExpirationDate' | translate }}</div>
-              </div>
-            </div>
-          
-            <div class="d-grid">
-              <button class="btn btn-lg btn-primary btn-register-config text-uppercase fw-bold mb-2" type="submit">{{ 'config.register' | translate }}</button>
-            </div>
-          </form>
-    </div>
-  </p-dialog>
-
+<!--app-add-reward-management [visibleAdd]="showDialogAdd" (rewardCreated)="rewardCreated($event)"></app-add-reward-management-->

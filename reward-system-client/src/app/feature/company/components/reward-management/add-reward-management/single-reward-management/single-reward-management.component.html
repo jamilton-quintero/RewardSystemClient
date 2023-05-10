@@ -1,0 +1,102 @@
+<form [formGroup]="offForm" (ngSubmit)="onSubmitOffForm()" novalidate>
+
+    <!-- Points to Redeem -->
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" id="floatingPointsToRedeem" placeholder="Points to Redeem"
+        formControlName="pointsToRedeem"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.pointsToRedeem.errors }" />
+      <label for="floatingPointsToRedeem">{{ 'company.reward.createform.pointstoredeem' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.pointsToRedeem.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.pointsToRedeem.errors.required">{{
+          'company.reward.createform.errormessages.invalidpointstoredeem'
+          | translate }}</div>
+      </div>
+    </div>
+    <!-- Available Rewards -->
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingAvailableRewards" placeholder="Available Rewards"
+        formControlName="availableRewards"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.availableRewards.errors }" />
+      <label for="floatingAvailableRewards">{{ 'company.reward.createform.nameofreward' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.availableRewards.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.availableRewards.errors.required">{{
+          'company.reward.createform.errormessages.invalidnameofreward'
+          | translate }}</div>
+      </div>
+    </div>
+    <!-- Daily Points Limit -->
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" id="floatingDailyPointsLimit" placeholder="Daily Points Limit"
+        formControlName="dailyPointsLimit"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.dailyPointsLimit.errors }" />
+      <label for="floatingDailyPointsLimit">{{ 'company.reward.createform.dailypointslimit' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.dailyPointsLimit.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.dailyPointsLimit.errors.required">{{ 'config.errormessages.invalidDailyPointsLimit'
+          | translate }}
+        </div>
+      </div>
+    </div>
+    <!-- Weekly Points Limit -->
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" id="floatingWeeklyPointsLimit" placeholder="Weekly Points Limit"
+        formControlName="weeklyPointsLimit"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.weeklyPointsLimit.errors }" />
+      <label for="floatingWeeklyPointsLimit">{{ 'company.reward.createform.weeklypointslimit' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.weeklyPointsLimit.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.weeklyPointsLimit.errors.required">{{
+          'config.errormessages.invalidWeeklyPointsLimit' | translate
+          }}</div>
+      </div>
+    </div>
+    <!-- Points Accumulated Message -->
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingPointsAccumulatedMessage"
+        placeholder="Points Accumulated Message" formControlName="pointsAccumulatedMessage"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.pointsAccumulatedMessage.errors }" />
+      <label for="floatingPointsAccumulatedMessage">{{ 'company.reward.createform.pointsaccumulatedmessage' | translate
+        }}</label>
+      <div *ngIf="submitted && offFormControls.pointsAccumulatedMessage.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.pointsAccumulatedMessage.errors.required">{{
+          'company.reward.createform.errormessages.invalidpointsaccumulatedmessage' | translate }}</div>
+      </div>
+    </div>
+    <!-- Redemption Message -->
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingRedemptionMessage" placeholder="Redemption Message"
+        formControlName="redemptionMessage"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.redemptionMessage.errors }" />
+      <label for="floatingRedemptionMessage">{{ 'company.reward.createform.redemptionmessage' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.redemptionMessage.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.redemptionMessage.errors.required">{{
+          'company.reward.createform.errormessages.invalidredemptionmessage' | translate }}</div>
+      </div>
+    </div>
+    <!-- Points Range -->
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" id="floatingPointsRange" placeholder="Points Range"
+        formControlName="pointsRange" [ngClass]="{ 'is-invalid': submitted && offFormControls.pointsRange.errors }" />
+      <label for="floatingPointsRange">{{ 'company.reward.createform.pointsrange' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.pointsRange.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.pointsRange.errors.required">{{
+          'company.reward.createform.errormessages.invalidpointsrange' |
+          translate }}</div>
+      </div>
+    </div>
+    <!-- Expiration Date -->
+    <div class="form-floating mb-3">
+      <input type="date" class="form-control" id="floatingExpirationDate" placeholder="Expiration Date"
+        formControlName="expirationDate"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.expirationDate.errors }" />
+      <label for="floatingExpirationDate">{{ 'company.reward.createform.expiratiodate' | translate }}</label>
+      <div *ngIf="submitted && offFormControls.expirationDate.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.expirationDate.errors.required">{{
+          'company.reward.createform.errormessages.invalidexpirationdate'
+          | translate }}</div>
+      </div>
+    </div>
+
+    <div class="d-grid">
+      <button class="btn btn-lg btn-primary btn-register-config text-uppercase fw-bold mb-2" type="submit">{{
+        'company.reward.createform.btncreate' | translate }}</button>
+    </div>
+  </form>

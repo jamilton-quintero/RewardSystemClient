@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { ListRewardManagementComponent } from './list-reward-management/list-reward-management.component';
 
 @Component({
   selector: 'app-reward-management',
@@ -7,57 +8,46 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./reward-management.component.scss']
 })
 export class RewardManagementComponent implements OnInit{
-  rewars = [
-    {
-      name: 'Gran promocion anual',
-      porintsToRedem: 100,
-      expirationDate: "2023-10-10"
-    },
-    // ... otros usuarios ...
-  ];
-  visible: boolean;
+
+  @ViewChild(ListRewardManagementComponent) getRewardListComponent: ListRewardManagementComponent;
+
+  showDialogAdd: boolean;
+
   form: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder) { }
+
+  showAddForm = false;
+  showAddList = true;
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      pointsToRedeem: ['', Validators.required],
-      availableRewards: ['', Validators.required],
-      dailyPointsLimit: ['', Validators.required],
-      weeklyPointsLimit: ['', Validators.required],
-      pointsAccumulatedMessage: ['', Validators.required],
-      redemptionMessage: ['', Validators.required],
-      pointsRange: ['', Validators.required],
-      expirationDate: ['', Validators.required]
-    });
+
   }
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  onEditUser(user: any) {
-    // Abre un modal o un formulario para editar los detalles del usuario
-    console.log('Editar usuario:', user);
-  }
+  /*showDialogAddReward() {
+    //this.showDialogAdd = true;
+    this.router.navigate(['/create']);
+  }*/
 
-  onDeleteUser(user: any) {
-    // Elimina al usuario de la lista y actualiza la base de datos
-    console.log('Eliminar usuario:', user);
-  }
-
-  onSubmit(): void {
-    if (this.f.valid) {
-      // Envía los datos del formulario al backend
-    }
-  }
-
-  registerCompanyConfig(){
+  showAddRewardForm() {
+    this.showAddForm = true;
+    this.showAddList = false;
     
   }
 
-  showDialog() {
-    this.visible = true;
-}
+  showAddRewardList() {
+    this.showAddList = true;
+    this.showAddForm = false;
+  }
 
+  rewardCreated(isUserCreated: boolean): void {
+    if (isUserCreated) {
+      this.showDialogAdd = false;
+      this.getRewardListComponent.refreshRewards();
+    }
+  }
 }

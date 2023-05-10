@@ -1,14 +1,14 @@
 <div class="container">
-  <h1>Gestión de usuarios</h1>
+  <h1>{{ 'company.user.componenttitle' | translate }}</h1>
 
-  <p-button (click)="showDialog()" icon="pi pi-external-link" label="Load Data"></p-button>
+  <p-button (click)="showDialogLoadData()" icon="pi pi-external-link" label="{{ 'company.user.btnloaddata' | translate }}"></p-button>
 
-  <p-button (click)="showDialogAddUser()" icon="pi pi-external-link" label="Add New"></p-button>
+  <p-button (click)="showDialogAddUser()" icon="pi pi-external-link" label="{{ 'company.user.btnadduser' | translate }}"></p-button>
 
   <app-get-user-management></app-get-user-management>
 
 </div>
 
-<app-load-masive-user-user-management></app-load-masive-user-user-management>
+<app-load-masive-user-user-management [visibleLoad]="visibleLoadData"></app-load-masive-user-user-management>
 
-<app-add-user-management [visibleAdd]="showDialogAdd"></app-add-user-management>
+<app-add-user-management [visibleAdd]="showDialogAdd" (userCreated)="userCreated($event)"></app-add-user-management>

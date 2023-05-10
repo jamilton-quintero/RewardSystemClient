@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private companyService: CompanyService,
     private router: Router,
-    ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -54,28 +54,31 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const newCompany : Company = {
-      name : this.form.value.fullname,
-      email : this.form.value.email,
-      password : this.form.value.password,
+    this.createNewCompany();
+
+  }
+
+  public createNewCompany(): void {
+
+    const newCompany: Company = {
+      name: this.form.value.fullname,
+      email: this.form.value.email,
+      password: this.form.value.password,
     };
 
-    this.createNewCompany(newCompany);
-
+    this.companyService.createCompany(newCompany).subscribe(
+      {
+        next: (queryParams) => {
+          console.log('queryParams', queryParams);
+        },
+        error: (err: any) => { 
+          console.log(err);
+        },
+      }
+    );
   }
 
-  public createNewCompany(company:Company):void{
-    
-    this.companyService.createCompany(company).subscribe(resp => {
-      console.log(resp)
-    },
-        (err) => {
-
-          console.log(err)
-        })
-  }
-
-  public login(){
+  public login() {
     /*if(this.form.value.email === "danny-mz@hotmail.com" && this.form.value.password === "123456" ){
       this.router.navigate(['company']);
     }*/

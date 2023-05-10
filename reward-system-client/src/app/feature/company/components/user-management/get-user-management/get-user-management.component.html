@@ -2,12 +2,12 @@
     <p-table [value]="users | async">
       <ng-template pTemplate="header">
         <tr>
-          <th>Identificacion</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Email</th>
-          <th>Puntos totales</th>
-          <th>Acciones</th>
+          <th>{{ 'company.user.list.identificationdatetitletable' | translate }}</th>
+          <th>{{ 'company.user.list.firstnametitletable' | translate }}</th>
+          <th>{{ 'company.user.list.lastnametitletable' | translate }}</th>
+          <th>{{ 'company.user.list.emailtitletable' | translate }}</th>
+          <th>.</th>
+          <th>{{ 'company.user.list.actionstitletable' | translate }}</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
@@ -17,13 +17,14 @@
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.totalPoints }}</td>
-          <td>
-            <button pButton icon="pi pi-pencil" class="btn btn-warning me-1" (click)="onEditUser(user)"></button>
-            <button pButton icon="pi pi-trash" class="btn btn-danger" (click)="onDeleteUser(user)"></button>
+          <td>           
+            <button pButton icon="pi pi-pencil" class="btn btn-warning me-1" (click)="onEditUser(user)"></button> 
+            <app-delete-user-management [idUser]="user.id" (userDeleted)="userDeleted($event)"></app-delete-user-management>       
           </td>
         </tr>
       </ng-template>
-    </p-table>
-    
-    
+    </p-table> 
   </div>
+
+  <app-edit-user-user-management [visibleEdit]="showDialogEdit" [userToEdit]="userToEdit" (userEdited)="userEdited($event)"></app-edit-user-user-management>
+            

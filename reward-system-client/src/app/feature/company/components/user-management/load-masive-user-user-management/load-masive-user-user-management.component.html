@@ -4,7 +4,7 @@
         <p-fileUpload name="clientes" url="//localhost:3000/upload" accept=".xls,.xlsx,.csv"
           (onUpload)="onUpload($event)">
           <ng-template pTemplate="content">
-            <button pButton type="button" label="Cargar lista de clientes" class="btn btn-secondary"></button>
+            <button pButton type="button" label="{{ 'company.user.loaduser.btnstartupload' | translate }}" class="btn btn-secondary"></button>
           </ng-template>
         </p-fileUpload>
       </div>

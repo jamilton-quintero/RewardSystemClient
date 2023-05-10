@@ -1,0 +1,26 @@
+<div class="mt-3">
+    <p-table [value]="rewards | async">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>{{ 'company.reward.list.nametitletable' | translate }}</th>
+                <th>{{ 'company.reward.list.pointstoredemtitletable' | translate }}</th>
+                <th>{{ 'company.reward.list.expirationdatetitletable' | translate }}</th>
+                <th>{{ 'company.reward.list.actionstitletable' | translate }}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-reward>
+            <tr>
+                <td>{{ reward.availableRewards }}</td>
+                <td>{{ reward.pointsToRedeem  }}</td>
+                <td>{{ reward.expirationDate }}</td>
+                <td>
+                    <button pButton icon="pi pi-pencil" class="btn btn-warning me-1" (click)="onEditReward(reward)"></button> 
+                    <app-delete-reward-management [idReward]="reward.id" (rewardDeleted)="rewardDeleted($event)"></app-delete-reward-management>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<app-edit-reward-management [visibleEdit]="showDialogEdit" [rewardToEdit]="rewardToEdit"
+    (rewardEdited)="rewardEdited($event)"></app-edit-reward-management>

@@ -1,47 +1,47 @@
-<p-dialog header="Header" [(visible)]="visibleAdd" [style]="{ width: '50vw' }">
+<p-dialog header="{{ 'company.user.modaltitle' | translate }}" [(visible)]="visibleAdd" [style]="{ width: '50vw' }">
     <div class="flex py-2 justify-content-center">
-      <form [formGroup]="form" (ngSubmit)="registerUser()" novalidate>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <!-- First Name -->
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="floatingFirstName" placeholder="First Name"
             formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-          <label for="floatingFirstName">{{ 'user.firstname' | translate }}</label>
+          <label for="floatingFirstName">{{ 'company.user.createform.firstname' | translate }}</label>
           <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-            <div *ngIf="f.firstName.errors.required">{{ 'user.errormessages.invalidfirstname' | translate }}</div>
+            <div *ngIf="f.firstName.errors.required">{{ 'company.user.createform.errormessages.invalidfirstname' | translate }}</div>
           </div>
         </div>
         <!-- Last Name -->
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="floatingLastName" placeholder="Last Name" formControlName="lastName"
             [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-          <label for="floatingLastName">{{ 'user.lastname' | translate }}</label>
+          <label for="floatingLastName">{{ 'company.user.createform.lastname' | translate }}</label>
           <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-            <div *ngIf="f.lastName.errors.required">{{ 'user.errormessages.invalidlastname' | translate }}</div>
+            <div *ngIf="f.lastName.errors.required">{{ 'company.user.createform.errormessages.invalidlastname' | translate }}</div>
           </div>
         </div>
         <!-- Email -->
         <div class="form-floating mb-3">
           <input type="email" class="form-control" id="floatingEmail" placeholder="Email" formControlName="email"
             [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-          <label for="floatingEmail">{{ 'user.email' | translate }}</label>
+          <label for="floatingEmail">{{ 'company.user.createform.email' | translate }}</label>
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.email">{{ 'user.errormessages.invalidemail' | translate }}</div>
+            <div *ngIf="f.email.errors.email">{{ 'company.user.createform.errormessages.invalidemail' | translate }}</div>
           </div>
         </div>
         <!-- Identification -->
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="floatingIdentification" placeholder="Identification"
             formControlName="identification" [ngClass]="{ 'is-invalid': submitted && f.identification.errors }" />
-          <label for="floatingIdentification">{{ 'user.identification' | translate }}</label>
+          <label for="floatingIdentification">{{ 'company.user.createform.identification' | translate }}</label>
           <div *ngIf="submitted && f.identification.errors" class="invalid-feedback">
-            <div *ngIf="f.identification.errors.required">{{ 'user.errormessages.invalididentification' | translate }}
+            <div *ngIf="f.identification.errors.required">{{ 'company.user.createform.errormessages.invalididentification' | translate }}
             </div>
           </div>
         </div>
   
         <div class="d-grid">
           <button class="btn btn-lg btn-primary btn-register-user text-uppercase fw-bold mb-2" type="submit">{{
-            'user.register' | translate }}</button>
+            'company.user.createform.btncreate' | translate }}</button>
         </div>
       </form>
   

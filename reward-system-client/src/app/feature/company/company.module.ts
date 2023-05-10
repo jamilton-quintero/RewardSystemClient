@@ -19,6 +19,21 @@ import { DeleteUserManagementComponent } from './components/user-management/dele
 import { GetUserManagementComponent } from './components/user-management/get-user-management/get-user-management.component';
 import { AddUserManagementComponent } from './components/user-management/add-user-management/add-user-management.component';
 import { LoadMasiveUserUserManagementComponent } from './components/user-management/load-masive-user-user-management/load-masive-user-user-management.component';
+import { EditUserUserManagementComponent } from './components/user-management/edit-user-user-management/edit-user-user-management.component';
+import { UserService } from './shared/service/user.service';
+import { CoreModule } from '@core/core.module';
+import { AddRewardManagementComponent } from './components/reward-management/add-reward-management/add-reward-management.component';
+import { EditRewardManagementComponent } from './components/reward-management/edit-reward-management/edit-reward-management.component';
+import { ListRewardManagementComponent } from './components/reward-management/list-reward-management/list-reward-management.component';
+import { RewardService } from './shared/service/reward.service';
+import { DeleteRewardManagementComponent } from './components/reward-management/delete-reward-management/delete-reward-management.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { PickListModule } from 'primeng/picklist';
+import { TimelineModule } from 'primeng/timeline';
+import { SingleRewardManagementComponent } from './components/reward-management/add-reward-management/single-reward-management/single-reward-management.component';
+import { SubRewardManagementComponent } from './components/reward-management/add-reward-management/sub-reward-management/sub-reward-management.component';
+import { AddSubRewardManagementComponent } from './components/reward-management/add-reward-management/sub-reward-management/add-sub-reward-management/add-sub-reward-management.component';
+import { SubRewardService } from './shared/service/sub-reward.service';
 
 @NgModule({
   declarations: [
@@ -30,19 +45,31 @@ import { LoadMasiveUserUserManagementComponent } from './components/user-managem
     DeleteUserManagementComponent,
     GetUserManagementComponent,
     AddUserManagementComponent,
-    LoadMasiveUserUserManagementComponent],
+    LoadMasiveUserUserManagementComponent,
+    EditUserUserManagementComponent,
+    AddRewardManagementComponent,
+    EditRewardManagementComponent,
+    ListRewardManagementComponent,
+    DeleteRewardManagementComponent,
+    SingleRewardManagementComponent,
+    SubRewardManagementComponent,
+    AddSubRewardManagementComponent],
   imports: [
     CommonModule,
     CompanyRoutingModule,
     SharedModule,
+    CoreModule,
     TabMenuModule,
     TableModule,
     FileUploadModule,
     InputTextModule,
     DialogModule,
     TranslateModule,
+    SelectButtonModule,
+    PickListModule,
+    TimelineModule
   ],
 
-  providers: [CompanyService]
+  providers: [CompanyService, UserService, RewardService, SubRewardService]
 })
 export class CompanyModule { }

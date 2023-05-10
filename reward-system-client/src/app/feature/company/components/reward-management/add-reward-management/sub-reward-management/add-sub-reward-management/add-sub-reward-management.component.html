@@ -1,0 +1,41 @@
+<p-dialog header="{{ 'company.multireward.subreward.modaltitle' | translate }}" [(visible)]="visibleAdd" [style]="{ width: '50vw' }">
+
+    <div class="flex py-2 justify-content-center">
+
+    <form [formGroup]="offForm" (ngSubmit)="onSubmitOffForm()" novalidate>
+
+        <!-- Points to Redeem -->
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control" id="floatingPointsToRedeem" placeholder="Points to Redeem"
+            formControlName="pointsToRedeem"
+            [ngClass]="{ 'is-invalid': submitted && offFormControls.pointsToRedeem.errors }" />
+          <label for="floatingPointsToRedeem">{{ 'company.multireward.subreward.createform.pointstoredeem' | translate }}</label>
+          <div *ngIf="submitted && offFormControls.pointsToRedeem.errors" class="invalid-feedback">
+            <div *ngIf="offFormControls.pointsToRedeem.errors.required">{{
+              'company.multireward.subreward.createform.errormessages.invalidpointstoredeem'
+              | translate }}</div>
+          </div>
+        </div>
+        <!-- Available Rewards -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingAvailableRewards" placeholder="Available Rewards"
+            formControlName="availableRewards"
+            [ngClass]="{ 'is-invalid': submitted && offFormControls.availableRewards.errors }" />
+          <label for="floatingAvailableRewards">{{ 'company.multireward.subreward.createform.nameofreward' | translate }}</label>
+          <div *ngIf="submitted && offFormControls.availableRewards.errors" class="invalid-feedback">
+            <div *ngIf="offFormControls.availableRewards.errors.required">{{
+              'company.multireward.subreward.createform.errormessages.invalidnameofreward'
+              | translate }}</div>
+          </div>
+        </div>
+
+        <div class="d-grid">
+          <button class="btn btn-lg btn-primary btn-register-config text-uppercase fw-bold mb-2" type="submit">{{
+            'company.multireward.subreward.createform.btncreate' | translate }}</button>
+        </div>
+
+      </form>
+  
+  </div>
+  
+  </p-dialog>

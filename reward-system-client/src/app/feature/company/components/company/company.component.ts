@@ -21,7 +21,7 @@ export class CompanyComponent {
       this.items = [
           { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: "/company/home" },
           { label: 'users', icon: 'pi pi-fw pi-calendar' , routerLink: "/company/user-management"},
-          { label: 'Rewars', icon: 'pi pi-fw pi-pencil' , routerLink: "/company/reward-management"},
+          { label: 'Rewars', icon: 'pi pi-fw pi-pencil' , routerLink: "/company/reward-management/list"},
           { label: 'Settings', icon: 'pi pi-fw pi-cog' , routerLink: "/company/configuration"}
       ];
 
@@ -31,4 +31,5 @@ export class CompanyComponent {
   activateLast() {
       this.activeItem = this.items[this.items.length - 1];
   }
+  
 }

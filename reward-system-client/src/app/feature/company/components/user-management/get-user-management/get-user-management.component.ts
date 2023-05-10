@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserDto } from '@company/shared/model/dto/user-dto';
-import { CompanyService } from '@company/shared/service/company.service';
+import { UserService } from '@company/shared/service/user.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,23 +10,40 @@ import { Observable } from 'rxjs';
 })
 export class GetUserManagementComponent implements OnInit{
 
+  @Input() isUsercreated:boolean;
+  
+  showDialogEdit: boolean;
+  userToEdit : UserDto;
+  
   public users: Observable<UserDto[]>;
   
   constructor(
-    protected companyService:CompanyService) { }
+    protected userService: UserService) { }
 
   ngOnInit(): void {
-    this.users = this.companyService.getusersByCompany(1);
+    this.refreshUsers();
   }
 
-  onEditUser(user: any) {
-    // Abre un modal o un formulario para editar los detalles del usuario
-    console.log('Editar usuario:', user);
+  refreshUsers(): void {
+    this.users = this.userService.getUsersByCompany(1);
   }
 
-  onDeleteUser(user: any) {
-    // Elimina al usuario de la lista y actualiza la base de datos
-    console.log('Eliminar usuario:', user);
+  userEdited(isUserEdited: boolean): void {
+    if (isUserEdited) {
+      this.showDialogEdit = false;
+      this.refreshUsers();
+    }
   }
 
+  userDeleted(isUserDeleted: boolean): void {
+    if (isUserDeleted) {
+      this.refreshUsers();
+    }
+  }
+
+  onEditUser(user:UserDto) {
+    this.userToEdit = user;
+    this.showDialogEdit = true;
+  }
+  
 }

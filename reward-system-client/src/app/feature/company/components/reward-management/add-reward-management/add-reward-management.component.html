@@ -1,0 +1,16 @@
+<!--p-dialog header="Header" [(visible)]="visibleAdd" [style]="{ width: '50vw' }"-->
+<div class="flex py-2 justify-content-center">
+
+  <div class="form-floating mb-3">
+    <p-selectButton [options]="stateOptions" (onChange)="onStateChange($event.value)" optionLabel="label"
+      optionValue="value" [(ngModel)]="selectedState"></p-selectButton>
+
+  </div>
+
+  <app-single-reward-management *ngIf="selectedState == 'off'"></app-single-reward-management>
+
+  <app-sub-reward-management *ngIf="selectedState == 'on'"></app-sub-reward-management>
+
+</div>
+
+<!--/p-dialog-->
