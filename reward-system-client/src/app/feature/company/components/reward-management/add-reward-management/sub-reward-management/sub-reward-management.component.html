@@ -1,112 +1,109 @@
-<p-button (click)="showAddSubRewardForm()" icon="pi pi-external-link" label="{{'company.multireward.btntitlesubreward'| translate }}"></p-button>
 
+<div class="justify-content-center">
 <form [formGroup]="onForm" (ngSubmit)="onSubmitOnForm()" novalidate>
+  <!-- Reward Name -->
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingAvailableRewards" placeholder="Available Rewards"
+      formControlName="rewardName" [ngClass]="{ 'is-invalid': submitted && onFormControls.availableRewards.errors }" />
+    <label for="floatingAvailableRewards">{{ 'company.multireward.createform.nameofreward' | translate }}</label>
+    <div *ngIf="submitted && onFormControls.availableRewards.errors" class="invalid-feedback">
+      <div *ngIf="onFormControls.availableRewards.errors.required">{{
+        'company.multireward.createform.errormessages.invalidnameofreward'
+        | translate }}</div>
+    </div>
+  </div>
+  <!-- Daily Points Limit -->
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="floatingDailyPointsLimit" placeholder="Daily Points Limit"
+      formControlName="dailyPointsLimit"
+      [ngClass]="{ 'is-invalid': submitted && onFormControls.dailyPointsLimit.errors }" />
+    <label for="floatingDailyPointsLimit">{{ 'company.multireward.createform.dailypointslimit' | translate }}</label>
+    <div *ngIf="submitted && onFormControls.dailyPointsLimit.errors" class="invalid-feedback">
+      <div *ngIf="onFormControls.dailyPointsLimit.errors.required">{{ 'config.errormessages.invalidDailyPointsLimit'
+        | translate }}
+      </div>
+    </div>
+  </div>
+  <!-- Weekly Points Limit -->
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="floatingWeeklyPointsLimit" placeholder="Weekly Points Limit"
+      formControlName="weeklyPointsLimit"
+      [ngClass]="{ 'is-invalid': submitted && onFormControls.weeklyPointsLimit.errors }" />
+    <label for="floatingWeeklyPointsLimit">{{ 'company.multireward.createform.weeklypointslimit' | translate }}</label>
+    <div *ngIf="submitted && onFormControls.weeklyPointsLimit.errors" class="invalid-feedback">
+      <div *ngIf="onFormControls.weeklyPointsLimit.errors.required">{{
+        'config.errormessages.invalidWeeklyPointsLimit' | translate
+        }}</div>
+    </div>
+  </div>
+  <!-- Points Accumulated Message -->
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingPointsAccumulatedMessage"
+      placeholder="Points Accumulated Message" formControlName="pointsAccumulatedMessage"
+      [ngClass]="{ 'is-invalid': submitted && onFormControls.pointsAccumulatedMessage.errors }" />
+    <label for="floatingPointsAccumulatedMessage">{{ 'company.multireward.createform.pointsaccumulatedmessage' |
+      translate
+      }}</label>
+    <div *ngIf="submitted && onFormControls.pointsAccumulatedMessage.errors" class="invalid-feedback">
+      <div *ngIf="onFormControls.pointsAccumulatedMessage.errors.required">{{
+        'company.multireward.createform.errormessages.invalidpointsaccumulatedmessage' | translate }}</div>
+    </div>
+  </div>
+  <!-- Redemption Message -->
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingRedemptionMessage" placeholder="Redemption Message"
+      formControlName="redemptionMessage"
+      [ngClass]="{ 'is-invalid': submitted && onFormControls.redemptionMessage.errors }" />
+    <label for="floatingRedemptionMessage">{{ 'company.multireward.createform.redemptionmessage' | translate }}</label>
+    <div *ngIf="submitted && onFormControls.redemptionMessage.errors" class="invalid-feedback">
+      <div *ngIf="onFormControls.redemptionMessage.errors.required">{{
+        'company.multireward.createform.errormessages.invalidredemptionmessage' | translate }}</div>
+    </div>
+  </div>
+  <!-- Expiration Date -->
+  <div class="form-floating mb-3">
+    <input type="date" class="form-control" id="floatingExpirationDate" placeholder="Expiration Date"
+      formControlName="expirationDate"
+      [ngClass]="{ 'is-invalid': submitted && onFormControls.expirationDate.errors }" />
+    <label for="floatingExpirationDate">{{ 'company.multireward.createform.expiratiodate' | translate }}</label>
+    <div *ngIf="submitted && onFormControls.expirationDate.errors" class="invalid-feedback">
+      <div *ngIf="onFormControls.expirationDate.errors.required">{{
+        'company.multireward.createform.errormessages.invalidexpirationdate'
+        | translate }}</div>
+    </div>
+  </div>
 
-    <!-- Reward Name -->
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingAvailableRewards" placeholder="Available Rewards"
-        formControlName="rewardName"
-        [ngClass]="{ 'is-invalid': submitted && onFormControls.availableRewards.errors }" />
-      <label for="floatingAvailableRewards">{{ 'company.multireward.createform.nameofreward' | translate }}</label>
-      <div *ngIf="submitted && onFormControls.availableRewards.errors" class="invalid-feedback">
-        <div *ngIf="onFormControls.availableRewards.errors.required">{{
-          'company.multireward.createform.errormessages.invalidnameofreward'
-          | translate }}</div>
-      </div>
-    </div>
-    <!-- Daily Points Limit -->
-    <div class="form-floating mb-3">
-      <input type="number" class="form-control" id="floatingDailyPointsLimit" placeholder="Daily Points Limit"
-        formControlName="dailyPointsLimit"
-        [ngClass]="{ 'is-invalid': submitted && onFormControls.dailyPointsLimit.errors }" />
-      <label for="floatingDailyPointsLimit">{{ 'company.multireward.createform.dailypointslimit' | translate }}</label>
-      <div *ngIf="submitted && onFormControls.dailyPointsLimit.errors" class="invalid-feedback">
-        <div *ngIf="onFormControls.dailyPointsLimit.errors.required">{{ 'config.errormessages.invalidDailyPointsLimit'
-          | translate }}
-        </div>
-      </div>
-    </div>
-    <!-- Weekly Points Limit -->
-    <div class="form-floating mb-3">
-      <input type="number" class="form-control" id="floatingWeeklyPointsLimit" placeholder="Weekly Points Limit"
-        formControlName="weeklyPointsLimit"
-        [ngClass]="{ 'is-invalid': submitted && onFormControls.weeklyPointsLimit.errors }" />
-      <label for="floatingWeeklyPointsLimit">{{ 'company.multireward.createform.weeklypointslimit' | translate }}</label>
-      <div *ngIf="submitted && onFormControls.weeklyPointsLimit.errors" class="invalid-feedback">
-        <div *ngIf="onFormControls.weeklyPointsLimit.errors.required">{{
-          'config.errormessages.invalidWeeklyPointsLimit' | translate
-          }}</div>
-      </div>
-    </div>
-    <!-- Points Accumulated Message -->
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingPointsAccumulatedMessage"
-        placeholder="Points Accumulated Message" formControlName="pointsAccumulatedMessage"
-        [ngClass]="{ 'is-invalid': submitted && onFormControls.pointsAccumulatedMessage.errors }" />
-      <label for="floatingPointsAccumulatedMessage">{{ 'company.multireward.createform.pointsaccumulatedmessage' | translate
-        }}</label>
-      <div *ngIf="submitted && onFormControls.pointsAccumulatedMessage.errors" class="invalid-feedback">
-        <div *ngIf="onFormControls.pointsAccumulatedMessage.errors.required">{{
-          'company.multireward.createform.errormessages.invalidpointsaccumulatedmessage' | translate }}</div>
-      </div>
-    </div>
-    <!-- Redemption Message -->
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingRedemptionMessage" placeholder="Redemption Message"
-        formControlName="redemptionMessage"
-        [ngClass]="{ 'is-invalid': submitted && onFormControls.redemptionMessage.errors }" />
-      <label for="floatingRedemptionMessage">{{ 'company.multireward.createform.redemptionmessage' | translate }}</label>
-      <div *ngIf="submitted && onFormControls.redemptionMessage.errors" class="invalid-feedback">
-        <div *ngIf="onFormControls.redemptionMessage.errors.required">{{
-          'company.multireward.createform.errormessages.invalidredemptionmessage' | translate }}</div>
-      </div>
-    </div>
-    <!-- Expiration Date -->
-    <div class="form-floating mb-3">
-      <input type="date" class="form-control" id="floatingExpirationDate" placeholder="Expiration Date"
-        formControlName="expirationDate"
-        [ngClass]="{ 'is-invalid': submitted && onFormControls.expirationDate.errors }" />
-      <label for="floatingExpirationDate">{{ 'company.multireward.createform.expiratiodate' | translate }}</label>
-      <div *ngIf="submitted && onFormControls.expirationDate.errors" class="invalid-feedback">
-        <div *ngIf="onFormControls.expirationDate.errors.required">{{
-          'company.multireward.createform.errormessages.invalidexpirationdate'
-          | translate }}</div>
-      </div>
-    </div>
+    <p-button (click)="showAddSubRewardForm()" icon="pi pi-external-link"
+      label="{{'company.multireward.btntitlesubreward'| translate }}" class=""></p-button>
 
-    <p-pickList [source]="sourceProducts" [target]="targetProducts" 
-    sourceHeader="{{'company.multireward.picklistsourcetitle'| translate }}" 
-    targetHeader="{{'company.multireward.picklisttargettitle'| translate }}"
-      [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }" [targetStyle]="{ height: '30rem' }"
-      filterBy="name" sourceFilterPlaceholder="{{'company.multireward.picklistsearchtitle'| translate }}" 
-      targetFilterPlaceholder="{{'company.multireward.picklistsearchtitle'| translate }}"
-      breakpoint="1400px">
-      <ng-template let-product pTemplate="item">
-        <div class="flex flex-wrap p-2 align-items-center gap-3">
-          <img class="w-4rem shadow-2 flex-shrink-0 border-round"
-            src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" alt="{item.name}" />
-          <div class="flex-1 flex flex-column gap-2">
-            <span class="font-bold">{{ product.name }}</span>
-            <div class="flex align-products-center gap-2">
-              <i class="pi pi-tag text-sm"></i>
-              <span>{{ product.category }}</span>
-            </div>
-          </div>
-          <span class="font-bold text-900">{{ '$' + product.price }}</span>
-        </div>
-      </ng-template>
-    </p-pickList>
+  <p-pickList [source]="subRewards | async" [target]="targetProducts"
+    sourceHeader="{{'company.multireward.picklistsourcetitle'| translate }}"
+    targetHeader="{{'company.multireward.picklisttargettitle'| translate }}" [dragdrop]="true" [responsive]="true"
+    [sourceStyle]="{ height: '30rem' }" [targetStyle]="{ height: '30rem' }" filterBy="name"
+    sourceFilterPlaceholder="{{'company.multireward.picklistsearchtitle'| translate }}"
+    targetFilterPlaceholder="{{'company.multireward.picklistsearchtitle'| translate }}" breakpoint="1400px"
+    (onMoveToSource)="updateEvents()" (onMoveToTarget)="updateEvents()" (onMoveAllToSource)="updateEvents()"
+    (onMoveAllToTarget)="updateEvents()">
+    <ng-template let-subrewards pTemplate="item">
+      <h5>{{subrewards.name}} = {{subrewards.pointsToRedeem}}</h5>
+    </ng-template>
+  </p-pickList>
 
-    <p-timeline [value]="events" layout="horizontal" align="top">
-      <ng-template pTemplate="content" let-event>
-          {{ event }}
-      </ng-template>
-    </p-timeline>
+  <p-timeline class="mb-2" [value]="events" layout="horizontal" align="top">
+    <ng-template pTemplate="content" let-event>
+      {{ event }}
+    </ng-template>
+  </p-timeline>
 
-    <div class="d-grid">
-      <button class="btn btn-lg btn-primary btn-register-config text-uppercase fw-bold mb-2" type="submit">{{
-        'company.multireward.createform.btncreate' | translate }}</button>
-    </div>
-  </form>
+  <div class="d-grid mb-2">
+    <button class="btn btn-lg btn-primary btn-register-config text-uppercase fw-bold mb-2" type="submit">{{
+      'company.multireward.createform.btncreate' | translate }}</button>
+  </div>
 
-  <app-add-sub-reward-management [visibleAdd]="showAddForm"></app-add-sub-reward-management>
+</form>
+
+</div>
+
+<app-add-sub-reward-management [visibleAdd]="showAddForm" (subRewardCreated)="subRewardCreated($event)"
+  (modalClosed)="modalClosed($event)">
+</app-add-sub-reward-management>

@@ -1,16 +1,14 @@
-<!--p-dialog header="Header" [(visible)]="visibleAdd" [style]="{ width: '50vw' }"-->
-<div class="flex py-2 justify-content-center">
 
+<div class="flex py-2 justify-content-center mb-2">
+
+  <h5 class="mb-1">Cumulative multi-reward system</h5>
   <div class="form-floating mb-3">
     <p-selectButton [options]="stateOptions" (onChange)="onStateChange($event.value)" optionLabel="label"
       optionValue="value" [(ngModel)]="selectedState"></p-selectButton>
-
   </div>
 
-  <app-single-reward-management *ngIf="selectedState == 'off'"></app-single-reward-management>
+  <app-single-reward-management *ngIf="!selectedState"></app-single-reward-management>
 
-  <app-sub-reward-management *ngIf="selectedState == 'on'"></app-sub-reward-management>
+  <app-sub-reward-management *ngIf="selectedState"></app-sub-reward-management>
 
 </div>
-
-<!--/p-dialog-->

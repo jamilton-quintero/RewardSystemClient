@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubReward } from '@company/shared/model/sub-reward';
 import { SubRewardService } from '@company/shared/service/sub-reward.service';
@@ -11,6 +11,8 @@ import { SubRewardService } from '@company/shared/service/sub-reward.service';
 export class AddSubRewardManagementComponent implements OnInit{
 
   @Input() visibleAdd: boolean;
+  @Output() subRewardCreated = new EventEmitter<boolean>();
+  @Output() modalClosed = new EventEmitter<boolean>();
 
   offForm: FormGroup;
   submitted = false;
@@ -25,14 +27,7 @@ export class AddSubRewardManagementComponent implements OnInit{
     this.offForm = this.formBuilder.group({
 
       pointsToRedeem: ['', Validators.required],
-      availableRewards: ['', Validators.required],
-      dailyPointsLimit: ['', Validators.required],
-      weeklyPointsLimit: ['', Validators.required],
-      pointsAccumulatedMessage: ['', Validators.required],
-      redemptionMessage: ['', Validators.required],
-      pointsRange: ['', Validators.required],
-      expirationDate: ['', Validators.required],
-    
+      name: ['', Validators.required]
     });
 
   }
@@ -41,9 +36,6 @@ export class AddSubRewardManagementComponent implements OnInit{
     return this.offForm.controls;
   }
 
-  onSubmitOffForm(): void {
-    // Lógica de envío del formulario cuando multiReward es 'off'
-  }
 
   onSubmit(): void {
     
@@ -53,34 +45,32 @@ export class AddSubRewardManagementComponent implements OnInit{
       return;
     }
 
-    this.createNewUser();
+    this.createNewSubReward();
 
   }
 
-  public createNewUser():void{
+  public createNewSubReward():void{
 
     const newReward : SubReward = {
       pointsToRedeem: this.offForm.value.pointsToRedeem,
-      availableRewards : this.offForm.value.availableRewards,
-      dailyPointsLimit : this.offForm.value.dailyPointsLimit,
-      weeklyPointsLimit : this.offForm.value.weeklyPointsLimit,
-      pointsAccumulatedMessage : this.offForm.value.pointsAccumulatedMessage,
-      redemptionMessage : this.offForm.value.redemptionMessage,
-      pointsRange : this.offForm.value.pointsRange,
-      expirationDate : this.offForm.value.expirationDate
+      name : this.offForm.value.name
     };
 
     this.subRewardService.createSubReward(newReward, 1).subscribe(
       {
         next: (queryParams) => {
           console.log('queryParams', queryParams);
-          //this.rewardCreated.emit(true); 
+          this.subRewardCreated.emit(true); 
         },
         error: (err: any) => { 
           console.log(err);
         },
       }
     );
+  }
+
+  public onHideModal(){
+    this.subRewardCreated.emit(true); 
   }
 
 }
