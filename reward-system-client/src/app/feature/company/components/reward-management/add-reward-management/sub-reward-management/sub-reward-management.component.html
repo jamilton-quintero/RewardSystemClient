@@ -60,6 +60,17 @@
         'company.multireward.createform.errormessages.invalidredemptionmessage' | translate }}</div>
     </div>
   </div>
+      <!-- Points Range -->
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingPointsRange" placeholder="Points Range"
+          formControlName="pointsRange" [ngClass]="{ 'is-invalid': submitted && onFormControls.pointsRange.errors }" />
+        <label for="floatingPointsRange">{{ 'company.multireward.createform.pointsrange' | translate }}</label>
+        <div *ngIf="submitted && onFormControls.pointsRange.errors" class="invalid-feedback">
+          <div *ngIf="onFormControls.pointsRange.errors.required">{{
+            'company.multireward.createform.errormessages.invalidpointsrange' |
+            translate }}</div>
+        </div>
+      </div>
   <!-- Expiration Date -->
   <div class="form-floating mb-3">
     <input type="date" class="form-control" id="floatingExpirationDate" placeholder="Expiration Date"

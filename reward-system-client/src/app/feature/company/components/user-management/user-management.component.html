@@ -1,7 +1,7 @@
 <div class="container">
   <h1>{{ 'company.user.componenttitle' | translate }}</h1>
 
-  <p-button (click)="showDialogLoadData()" icon="pi pi-external-link" label="{{ 'company.user.btnloaddata' | translate }}"></p-button>
+  <p-button class="me-1" (click)="showDialogLoadData()" icon="pi pi-external-link" label="{{ 'company.user.btnloaddata' | translate }}"></p-button>
 
   <p-button (click)="showDialogAddUser()" icon="pi pi-external-link" label="{{ 'company.user.btnadduser' | translate }}"></p-button>
 
@@ -12,3 +12,4 @@
 <app-load-masive-user-user-management [visibleLoad]="visibleLoadData"></app-load-masive-user-user-management>
 
 <app-add-user-management [visibleAdd]="showDialogAdd" (userCreated)="userCreated($event)"></app-add-user-management>
+

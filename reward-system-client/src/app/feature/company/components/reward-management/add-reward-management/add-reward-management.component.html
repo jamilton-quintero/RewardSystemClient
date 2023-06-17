@@ -7,8 +7,8 @@
       optionValue="value" [(ngModel)]="selectedState"></p-selectButton>
   </div>
 
-  <app-single-reward-management *ngIf="!selectedState"></app-single-reward-management>
+  <app-single-reward-management *ngIf="!selectedState" [rewardToEdit]="rewardToEdit"></app-single-reward-management>
 
-  <app-sub-reward-management *ngIf="selectedState"></app-sub-reward-management>
+  <app-sub-reward-management *ngIf="selectedState" [rewardToEdit]="rewardToEdit"></app-sub-reward-management>
 
 </div>

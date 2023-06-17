@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RewardDto } from '@company/shared/model/dto/reward-dto';
+import { RewardToEditServiceService } from '@company/shared/service/reward-to-edit-service.service';
 import { RewardService } from '@company/shared/service/reward.service';
 import { Observable, of } from 'rxjs';
 
@@ -11,14 +12,15 @@ import { Observable, of } from 'rxjs';
 export class ListRewardManagementComponent {
   
   @Input() isRewardcreated:boolean;
-  
+  @Output() rewardToEdit = new EventEmitter<RewardDto>();
   showDialogEdit: boolean;
-  rewardToEdit : RewardDto;
+  //rewardToEdit : RewardDto;
 
   public rewards: Observable<RewardDto[]>;
 
   constructor(
-    protected rewardService: RewardService) { }
+    protected rewardService: RewardService,
+    protected rewardToEditServiceService: RewardToEditServiceService) { }
 
   ngOnInit(): void {
     this.refreshRewards();
@@ -46,8 +48,12 @@ export class ListRewardManagementComponent {
   }
 
   onEditReward(reward:RewardDto) {
-    this.rewardToEdit = reward;
-    this.showDialogEdit = true;
+    //this.rewardToEdit = reward;
+    //this.showDialogEdit = true;
+    //.rewardToEdit = reward;
+    //this.showDialogEdit = true;
+    //this.rewardToEditServiceService.changeReward(reward);  
+    this.rewardToEdit.emit(reward); 
   }
   
 }

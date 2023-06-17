@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RewardDto } from '@company/shared/model/dto/reward-dto';
 import { SubRewardDto } from '@company/shared/model/dto/sub-reward-dto';
 import { Reward } from '@company/shared/model/reward';
 import { RewardService } from '@company/shared/service/reward.service';
@@ -17,6 +18,18 @@ export class SubRewardManagementComponent implements OnInit {
 
   @Output() rewardCreated = new EventEmitter<boolean>();
 
+  private _rewardToEdit: RewardDto;
+  @Input()
+  set rewardToEdit(user: RewardDto) {
+    this._rewardToEdit = user;
+    if (this.onForm) {
+      this.populateForm(user);
+    }
+  }
+
+  get rewardToEdit(): RewardDto {
+    return this._rewardToEdit;
+  }
   showAddForm = false;
 
   onForm: FormGroup;
@@ -25,14 +38,6 @@ export class SubRewardManagementComponent implements OnInit {
   targetProducts: any[] = [];
 
   events: any[];
-
-  stateOptions: any[] = [
-    { label: 'Off', value: 'off' },
-    { label: 'On', value: 'on' }
-  ];
-
-  selectedState: string = this.stateOptions[0].value;;
-
   public subRewards: Observable<SubRewardDto[]>;
 
   constructor(
@@ -52,9 +57,15 @@ export class SubRewardManagementComponent implements OnInit {
       weeklyPointsLimit: ['', Validators.required],
       pointsAccumulatedMessage: ['', Validators.required],
       redemptionMessage: ['', Validators.required],
+      pointsRange: ['', Validators.required],
       expirationDate: ['', Validators.required],
 
     });
+
+    if (this.rewardToEdit) {
+      this.populateForm(this.rewardToEdit);
+      this.getSubRewards();
+    }
 
     this.refreshSubRewards();
 
@@ -64,32 +75,48 @@ export class SubRewardManagementComponent implements OnInit {
     return this.onForm.controls;
   }
 
+  private populateForm(reward: RewardDto): void {
+    this.onForm.patchValue({
+      rewardName: reward.name,
+      dailyPointsLimit: reward.dailyPointsLimit,
+      weeklyPointsLimit: reward.weeklyPointsLimit,
+      pointsAccumulatedMessage: reward.pointsAccumulatedMessage,
+      redemptionMessage: reward.redemptionMessage,
+      pointsRange: reward.pointsRange,
+      expirationDate: reward.expirationDate
+    });
+  }
+
+  private getSubRewards(){
+    this.subRewardService.getSubRewardsByCompanyAndReward(1, this.rewardToEdit.id).subscribe(
+      {
+        next: (queryParams) => {
+          console.log('queryParams', queryParams);
+          this.targetProducts = queryParams;
+          //this.rewardCreated.emit(true);
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      }
+    );
+  }
+
   onSubmitOnForm(): void {
-    // Lógica de envío del formulario cuando multiReward es 'on'
-  }
-
-  onStateChange(state: string): void {
-    console.log(state);
-    this.selectedState = state;
-  }
-
-  onSubmit(): void {
-
     this.submitted = true;
 
     if (this.onForm.invalid) {
       return;
     }
 
-    this.createNewUser();
-
+    this.createNewRewardWithSubRewards();
   }
 
-  public createNewUser(): void {
+  public createNewRewardWithSubRewards(): void {
 
     const newReward: Reward = {
       pointsToRedeem: this.onForm.value.pointsToRedeem,
-      availableRewards: this.onForm.value.availableRewards,
+      name: this.onForm.value.rewardName,
       dailyPointsLimit: this.onForm.value.dailyPointsLimit,
       weeklyPointsLimit: this.onForm.value.weeklyPointsLimit,
       pointsAccumulatedMessage: this.onForm.value.pointsAccumulatedMessage,
@@ -98,7 +125,9 @@ export class SubRewardManagementComponent implements OnInit {
       expirationDate: this.onForm.value.expirationDate
     };
 
-    this.rewardService.createReward(newReward, 1).subscribe(
+    const subRewardsIds: string = this.targetProducts.map(subReward => subReward.id).join();
+
+    this.rewardService.createRewardWithSubRewards(newReward, 1, subRewardsIds).subscribe(
       {
         next: (queryParams) => {
           console.log('queryParams', queryParams);
@@ -155,14 +184,11 @@ export class SubRewardManagementComponent implements OnInit {
     setTimeout(() => this.updateEvents(), 0);
   }
 
-
   updateEvents(): void {
-
     const lineTargetProducts = this.targetProducts;
     lineTargetProducts.sort((a, b) => a.pointsToRedeem - b.pointsToRedeem);
     this.events = null;
     this.events = lineTargetProducts.map(product => product.name);
-
   }
 
 }

@@ -78,4 +78,29 @@ export class HttpService {
 
     return this.http.get<T>(serviceUrl, options);
   }
+
+  public doPostParameters<T, R>(serviceUrl: string, body: T, parametros: HttpParams, opts?: Options): Observable<R> {
+    const ropts = this.createOptions(opts);
+    const options = parametros !== null ? {
+      headers: ropts.headers,
+      params: parametros
+    } as Options : ropts;
+    return this.http.post<R>(serviceUrl, body, options);
+  }
+
+  public doGetParams(filtro: any) {
+    let params: HttpParams = new HttpParams();
+    for (const key of Object.keys(filtro)) {
+      if (filtro[key]) {
+        if (filtro[key] instanceof Array) {
+          filtro[key].forEach((item) => {
+            params = params.append(`${key.toString()}[]`, item);
+          });
+        } else {
+          params = params.append(key.toString(), filtro[key]);
+        }
+      }
+    }
+    return params;
+  }
 }

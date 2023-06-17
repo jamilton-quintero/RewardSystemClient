@@ -1,6 +1,6 @@
 export interface Reward {
     pointsToRedeem: number;
-    availableRewards: string;
+    name: string;
     dailyPointsLimit: number;
     weeklyPointsLimit: number;
     pointsAccumulatedMessage: string;

@@ -9,8 +9,8 @@
         <i class="pi pi-external-link"></i> {{ 'company.reward.btnreturn' | translate }}
     </button>
   
-      <app-add-reward-management *ngIf="showAddForm" (rewardCreated)="rewardCreated($event)"></app-add-reward-management>
-      <app-list-reward-management *ngIf="!showAddForm"></app-list-reward-management>
+      <app-add-reward-management *ngIf="showAddForm" [rewardToEdit]="rewardToEdit" (rewardCreated)="rewardCreated($event)"></app-add-reward-management>
+      <app-list-reward-management *ngIf="!showAddForm" (rewardToEdit)="rewardToEditEvent($event)"></app-list-reward-management>
       
 </div>
 

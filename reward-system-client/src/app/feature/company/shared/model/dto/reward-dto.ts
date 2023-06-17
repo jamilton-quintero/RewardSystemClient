@@ -1,8 +1,8 @@
 export class RewardDto {
-
     id: number;
     pointsToRedeem: number;
-    availableRewards: string;
+    name: string;
+    multiReward: boolean;
     dailyPointsLimit: number;
     weeklyPointsLimit: number;
     pointsAccumulatedMessage: string;
@@ -13,7 +13,7 @@ export class RewardDto {
     constructor(
         id: number,
         pointsToRedeem: number,
-        availableRewards: string,
+        name: string,
         dailyPointsLimit: number,
         weeklyPointsLimit: number,
         pointsAccumulatedMessage: string,
@@ -23,7 +23,7 @@ export class RewardDto {
     ) {
         this.id = id;
         this.pointsToRedeem = pointsToRedeem;
-        this.availableRewards = availableRewards;
+        this.name = name;
         this.dailyPointsLimit = dailyPointsLimit;
         this.weeklyPointsLimit = weeklyPointsLimit;
         this.pointsAccumulatedMessage = pointsAccumulatedMessage;

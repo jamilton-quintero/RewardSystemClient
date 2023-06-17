@@ -17,7 +17,8 @@
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.totalPoints }}</td>
-          <td>           
+          <td>  
+            <button pButton pRipple icon="pi pi-plus" class="p-button-success me-1" (click)="onAddRewardUser(user)"></button>    
             <button pButton icon="pi pi-pencil" class="btn btn-warning me-1" (click)="onEditUser(user)"></button> 
             <app-delete-user-management [idUser]="user.id" (userDeleted)="userDeleted($event)"></app-delete-user-management>       
           </td>
@@ -27,4 +28,6 @@
   </div>
 
   <app-edit-user-user-management [visibleEdit]="showDialogEdit" [userToEdit]="userToEdit" (userEdited)="userEdited($event)"></app-edit-user-user-management>
+
+  <app-add-reward-to-user [visibleAddReward]="showDialogAddReward" (rewardAdded)="rewardAdded($event)"></app-add-reward-to-user>
             

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { ListRewardManagementComponent } from './list-reward-management/list-reward-management.component';
+import { RewardDto } from '@company/shared/model/dto/reward-dto';
 
 @Component({
   selector: 'app-reward-management',
@@ -19,6 +20,8 @@ export class RewardManagementComponent implements OnInit{
   showAddForm = false;
   showAddList = true;
 
+  rewardToEdit: RewardDto;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -28,15 +31,10 @@ export class RewardManagementComponent implements OnInit{
     return this.form.controls;
   }
 
-  /*showDialogAddReward() {
-    //this.showDialogAdd = true;
-    this.router.navigate(['/create']);
-  }*/
-
   showAddRewardForm() {
     this.showAddForm = true;
-    this.showAddList = false;
-    
+    this.showAddList = false; 
+    this.rewardToEdit = null;
   }
 
   showAddRewardList() {
@@ -50,4 +48,10 @@ export class RewardManagementComponent implements OnInit{
       this.getRewardListComponent.refreshRewards();
     }
   }
+
+  rewardToEditEvent(reward: RewardDto){
+    this.showAddRewardForm();
+    this.rewardToEdit = reward;
+  }
+
 }

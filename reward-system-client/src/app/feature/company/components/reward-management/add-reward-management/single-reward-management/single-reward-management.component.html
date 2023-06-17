@@ -12,14 +12,14 @@
           | translate }}</div>
       </div>
     </div>
-    <!-- Available Rewards -->
+    <!-- Name Rewards -->
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="floatingAvailableRewards" placeholder="Available Rewards"
-        formControlName="availableRewards"
-        [ngClass]="{ 'is-invalid': submitted && offFormControls.availableRewards.errors }" />
+        formControlName="name"
+        [ngClass]="{ 'is-invalid': submitted && offFormControls.name.errors }" />
       <label for="floatingAvailableRewards">{{ 'company.reward.createform.nameofreward' | translate }}</label>
-      <div *ngIf="submitted && offFormControls.availableRewards.errors" class="invalid-feedback">
-        <div *ngIf="offFormControls.availableRewards.errors.required">{{
+      <div *ngIf="submitted && offFormControls.name.errors" class="invalid-feedback">
+        <div *ngIf="offFormControls.name.errors.required">{{
           'company.reward.createform.errormessages.invalidnameofreward'
           | translate }}</div>
       </div>

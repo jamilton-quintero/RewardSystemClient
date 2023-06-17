@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RewardDto } from '@company/shared/model/dto/reward-dto';
 import { Reward } from '@company/shared/model/reward';
 import { RewardService } from '@company/shared/service/reward.service';
 
@@ -17,6 +18,19 @@ export class SingleRewardManagementComponent implements OnInit {
   offForm: FormGroup;
   submitted = false;
 
+  private _rewardToEdit: RewardDto;
+  @Input()
+  set rewardToEdit(user: RewardDto) {
+    this._rewardToEdit = user;
+    if (this.offForm) {
+      this.populateForm(user);
+    }
+  }
+
+  get rewardToEdit(): RewardDto {
+    return this._rewardToEdit;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     protected rewardService: RewardService
@@ -27,7 +41,7 @@ export class SingleRewardManagementComponent implements OnInit {
     this.offForm = this.formBuilder.group({
 
       pointsToRedeem: ['', Validators.required],
-      availableRewards: ['', Validators.required],
+      name: ['', Validators.required],
       dailyPointsLimit: ['', Validators.required],
       weeklyPointsLimit: ['', Validators.required],
       pointsAccumulatedMessage: ['', Validators.required],
@@ -37,33 +51,44 @@ export class SingleRewardManagementComponent implements OnInit {
     
     });
 
+    if (this.rewardToEdit) {
+      this.populateForm(this.rewardToEdit);
+    }
   }
 
   get offFormControls(): { [key: string]: AbstractControl } {
     return this.offForm.controls;
   }
 
-  onSubmitOffForm(): void {
-    // Lógica de envío del formulario cuando multiReward es 'off'
+  private populateForm(reward: RewardDto): void {
+    this.offForm.patchValue({
+      pointsToRedeem: reward.pointsToRedeem,
+      name: reward.name,
+      dailyPointsLimit: reward.dailyPointsLimit,
+      weeklyPointsLimit: reward.weeklyPointsLimit,
+      pointsAccumulatedMessage: reward.pointsAccumulatedMessage,
+      redemptionMessage: reward.redemptionMessage,
+      pointsRange: reward.pointsRange,
+      expirationDate: reward.expirationDate
+    });
   }
 
-  onSubmit(): void {
-    
+  onSubmitOffForm(): void {
     this.submitted = true;
 
     if (this.offForm.invalid) {
       return;
     }
 
-    this.createNewUser();
+    this.createNewReward();
 
   }
 
-  public createNewUser():void{
+  public createNewReward():void{
 
     const newReward : Reward = {
       pointsToRedeem: this.offForm.value.pointsToRedeem,
-      availableRewards : this.offForm.value.availableRewards,
+      name : this.offForm.value.name,
       dailyPointsLimit : this.offForm.value.dailyPointsLimit,
       weeklyPointsLimit : this.offForm.value.weeklyPointsLimit,
       pointsAccumulatedMessage : this.offForm.value.pointsAccumulatedMessage,

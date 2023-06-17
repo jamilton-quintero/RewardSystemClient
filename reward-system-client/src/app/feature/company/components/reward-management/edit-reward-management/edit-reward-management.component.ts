@@ -59,7 +59,6 @@ export class EditRewardManagementComponent implements OnInit {
     return this.form.controls;
   }
 
-
   onSubmit(): void {
     
     this.submitted = true;
@@ -76,7 +75,7 @@ export class EditRewardManagementComponent implements OnInit {
 
     const rewardEdited : Reward = {
       pointsToRedeem: this.form.value.pointsToRedeem,
-      availableRewards : this.form.value.availableRewards,
+      name : this.form.value.availableRewards,
       dailyPointsLimit : this.form.value.dailyPointsLimit,
       weeklyPointsLimit : this.form.value.weeklyPointsLimit,
       pointsAccumulatedMessage : this.form.value.pointsAccumulatedMessage,
@@ -101,7 +100,7 @@ export class EditRewardManagementComponent implements OnInit {
   private populateForm(reward: RewardDto): void {
     this.form.patchValue({
       pointsToRedeem: reward.pointsToRedeem,
-      availableRewards : reward.availableRewards,
+      availableRewards : reward.name,
       dailyPointsLimit : reward.dailyPointsLimit,
       weeklyPointsLimit : reward.weeklyPointsLimit,
       pointsAccumulatedMessage : reward.pointsAccumulatedMessage,

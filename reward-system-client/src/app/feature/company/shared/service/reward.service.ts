@@ -17,6 +17,14 @@ export class RewardService {
   
   } 
 
+  public createRewardWithSubRewards(reward: Reward, companyId: number, subRewardsIds: string){
+    return this.http.doPostParameters<Reward, any>(`${this.endPoint}/rewards/companies/${companyId}/sub-rewards`, 
+    reward,
+    this.http.doGetParams({ subRewardsIds }),
+    this.http.optsName('Create a new user'))
+  
+  } 
+
   public editReward(reward: Reward, Id: number ){
     return this.http.doPut<Reward, any>(`${this.endPoint}/rewards/${Id}`, reward, this.http.optsName('Edit current user'))
   } 

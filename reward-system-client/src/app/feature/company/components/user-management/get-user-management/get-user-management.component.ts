@@ -14,7 +14,8 @@ export class GetUserManagementComponent implements OnInit{
   
   showDialogEdit: boolean;
   userToEdit : UserDto;
-  
+  showDialogAddReward: boolean;
+
   public users: Observable<UserDto[]>;
   
   constructor(
@@ -45,5 +46,17 @@ export class GetUserManagementComponent implements OnInit{
     this.userToEdit = user;
     this.showDialogEdit = true;
   }
-  
+
+  onAddRewardUser(user:UserDto) {
+    console.log(user);
+    this.showDialogAddReward = true;
+  }
+
+  rewardAdded(isRewardAdded: boolean): void {
+    if (isRewardAdded) {
+      this.showDialogAddReward = false;
+      this.refreshUsers();
+    }
+  }
+
 }

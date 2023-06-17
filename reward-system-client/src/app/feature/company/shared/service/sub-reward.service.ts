@@ -32,4 +32,12 @@ export class SubRewardService {
     );
   }
 
+  public getSubRewardsByCompanyAndReward(companyId: number, rewardId: number) {
+    console.log('Getting users for company:', companyId);
+    return this.http.doGet<SubRewardDto[]>(
+      `${environment.endpoint}/sub-rewards/companies/${companyId}/rewards/${rewardId}`,
+      this.http.optsName('consultar usuarios por copmpay')
+    );
+  }
+
 }

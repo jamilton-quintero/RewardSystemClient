@@ -34,6 +34,8 @@ import { SingleRewardManagementComponent } from './components/reward-management/
 import { SubRewardManagementComponent } from './components/reward-management/add-reward-management/sub-reward-management/sub-reward-management.component';
 import { AddSubRewardManagementComponent } from './components/reward-management/add-reward-management/sub-reward-management/add-sub-reward-management/add-sub-reward-management.component';
 import { SubRewardService } from './shared/service/sub-reward.service';
+import { RewardToEditServiceService } from './shared/service/reward-to-edit-service.service';
+import { AddRewardToUserComponent } from './components/user-management/add-reward-to-user/add-reward-to-user.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { SubRewardService } from './shared/service/sub-reward.service';
     DeleteRewardManagementComponent,
     SingleRewardManagementComponent,
     SubRewardManagementComponent,
-    AddSubRewardManagementComponent],
+    AddSubRewardManagementComponent,
+    AddRewardToUserComponent],
   imports: [
     CommonModule,
     CompanyRoutingModule,
@@ -70,6 +73,6 @@ import { SubRewardService } from './shared/service/sub-reward.service';
     TimelineModule
   ],
 
-  providers: [CompanyService, UserService, RewardService, SubRewardService]
+  providers: [CompanyService, UserService, RewardService, SubRewardService, RewardToEditServiceService]
 })
 export class CompanyModule { }

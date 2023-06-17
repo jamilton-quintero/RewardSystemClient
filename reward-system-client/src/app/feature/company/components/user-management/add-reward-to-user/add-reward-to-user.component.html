@@ -1,0 +1,24 @@
+
+<p-dialog header="Header" [(visible)]="visibleAddReward" [style]="{ width: '50vw' }" modal="true">
+    <p-pickList [source]="sourceReward" [target]="targetReward"
+    sourceHeader="{{'company.multireward.picklistsourcetitle'| translate }}"
+    targetHeader="{{'company.multireward.picklisttargettitle'| translate }}" [dragdrop]="true" [responsive]="true"
+    [sourceStyle]="{ height: '30rem' }" [targetStyle]="{ height: '30rem' }" filterBy="name"
+    sourceFilterPlaceholder="{{'company.multireward.picklistsearchtitle'| translate }}"
+    targetFilterPlaceholder="{{'company.multireward.picklistsearchtitle'| translate }}" breakpoint="1400px"
+    (onMoveToSource)="updateEvents()" (onMoveToTarget)="updateEvents()" (onMoveAllToSource)="updateEvents()"
+    (onMoveAllToTarget)="updateEvents()">
+    <ng-template let-subrewards pTemplate="item">
+      <h5>{{subrewards.name}} = {{subrewards.pointsToRedeem}}</h5>
+    </ng-template>
+  </p-pickList>
+
+
+  <div class="btn-save mt-4">
+    <button class="btn btn-primary btn-register-config text-uppercase fw-bold ">{{
+        'company.multireward.createform.btncreate' | translate }}</button>
+  </div>
+ 
+    
+
+</p-dialog>
